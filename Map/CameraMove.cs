@@ -7,9 +7,11 @@ public class CameraMove : MonoBehaviour
     private Transform m_Transform;
     private Transform player_Transform;
     public bool startFollow = false;
+    private Vector3 normalPos; //存放摄像机初始位置
     void Start()
     {
         m_Transform = gameObject.GetComponent<Transform>();
+        normalPos = m_Transform.position;
         player_Transform = GameObject.Find("cube_books").GetComponent<Transform>();
     }
 
@@ -27,5 +29,13 @@ public class CameraMove : MonoBehaviour
 
             m_Transform.position = Vector3.Lerp(m_Transform.position, pos, Time.deltaTime);
         }
+    }
+    
+    /// <summary>
+    /// 重置摄像机位置
+    /// </summary>
+    public void ResetCamera()
+    {
+        m_Transform.position = normalPos;
     }
 }
